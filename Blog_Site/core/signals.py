@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
-from post.models import Post
+from posts.models import Post
 
 @receiver(post_save,sender=Post)
 def handle_post_publish(sender,instance,created,**kwargs):
