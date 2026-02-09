@@ -18,7 +18,14 @@
         <div class="space-x-4">
             {% if user.is_authenticated %}
                 <a href="/dashboard/" class="hover:underline">Dashboard</a>
-                <a href="{% url 'logout' %}" class="text-red-500 hover:underline">Logout</a>
+                <form method="post" action="{% url 'logout' %}" class="inline">
+    {% csrf_token %}
+    <button type="submit"
+            class="text-red-500 hover:underline bg-transparent border-none cursor-pointer">
+        Logout
+    </button>
+</form>
+
             {% else %}
                 <a href="{% url 'login' %}" class="hover:underline">Login</a>
             {% endif %}
