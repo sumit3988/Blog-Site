@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Blog Home</title>
-</head>
-<body>
-    <h1>Published Posts</h1>
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
 
-    {% if posts %}
-        <ul>
-            {% for post in posts %}
-                <li>
-                    <a href="{% url 'posts:post-detail' post.slug %}">
-                        <strong>{{ post.title }}</strong>
-                    </a>
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">Published Posts</h1>
 
-                    {{ post.content|truncatewords:30 }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No posts published yet.</p>
-    {% endif %}
-</body>
-</html>
+{% if posts %}
+<div class="space-y-4">
+    {% for post in posts %}
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-semibold">
+                <a href="{% url 'posts:post-detail' post.slug %}" class="hover:underline">
+                    {{ post.title }}
+                </a>
+            </h2>
+            <p class="text-gray-600">{{ post.content|truncatewords:25 }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No posts yet.</p>
+{% endif %}
+{% endblock %}

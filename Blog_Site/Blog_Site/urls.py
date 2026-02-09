@@ -16,12 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import home
+from core.views import home, dashboard
 
 urlpatterns = [
     path("", home, name="home"),
-    path("admin/", admin.site.urls),
-    path("accounts/", include("django.contrib.auth.urls")),
-    path("posts/", include(("posts.urls", "posts"), namespace="posts")),
+    path("dashboard/", dashboard, name="dashboard"),
 
+    # ✅ Django auth URLs (login, logout, password reset, etc.)
+    path("accounts/", include("django.contrib.auth.urls")),
+
+    path("admin/", admin.site.urls),
+    path("posts/", include(("posts.urls", "posts"), namespace="posts")),
 ]

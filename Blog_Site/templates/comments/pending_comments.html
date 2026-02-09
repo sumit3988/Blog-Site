@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Comment Moderation{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">Pending Comments</h1>
+
+{% if comments %}
+<div class="space-y-4">
+    {% for comment in comments %}
+        <div class="bg-white dark:bg-gray-800 p-4 rounded shadow">
+            <p class="text-sm text-gray-500 mb-1">
+                On <strong>{{ comment.post.title }}</strong> by {{ comment.user.username }}
+            </p>
+
+            <p class="mb-4">{{ comment.content }}</p>
+
+            <div class="flex gap-4 text-sm">
+                <a href="{% url 'comments:approve' comment.id %}"
+                   class="text-green-600 hover:underline">
+                    Approve
+                </a>
+
+                <a href="{% url 'comments:delete' comment.id %}"
+                   class="text-red-500 hover:underline">
+                    Delete
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-gray-500">No pending comments 🎉</p>
+{% endif %}
+{% endblock %}
